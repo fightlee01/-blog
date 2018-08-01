@@ -1,3 +1,6 @@
+# VUE小结
+>2018.7.31
+
 ## 前言
 前段时间一直在写React，边学边写，发现并没有想象中的那么难，还是要克服自己的心理障碍；这人学什么忘什么，Vue快要被我丢完了，不是要写Vue的的任务，我可能又要忘光，趁机写一个小结做一下复习。
 
@@ -32,10 +35,11 @@ react和vue都要虚拟DOM，这里只说vue的，关键部分：virtual Dom是�
 总体看下来，Vue的diff对于不同的虚拟DOM会不去比较直接用新的DOM替换旧的DOM。而对相同的虚拟DOM会尽量不去产生新的DOM，尽量利用原先的DOM结构，所以整个过程是在对DOM进行打补丁，边比较边打补丁。
 
 #### 四、响应式的原理
-
+(又看的我有点蒙蔽)vue的响应式的设计模式其实就是观察者；在开始的初始化阶段，通过Obeject.definePropoty()来对vue的数据对象（这里应该是data）的每个属性添加get和set的钩子，而每个属性都有一个dep负责依赖的管理，get钩子被调用的时候（执行render()的时候）会进行依赖收集，dep对使用了属性的视图进行watcher实例收集，然后在set调用的时候，dep会通知所有收集的watcher进行视图更新。（每个vue实例都有一个watcher实例，可以理解为一个一个视图）。
 #### 五、nextTick()的原理
+由于上面说的响应式的特性会有一个bug,就是每次数据一更新就会调用set然后会update，假如在一个密集的操作里（比如对一个for循环里操作数据），岂不是要更新很多次，这性能消耗非常严重，这个就是nextTick()要做的事情了，因为每次更新都有set-->dep-->watcher-->upDate过程，在wacher要执行更新的这一步骤做点更改，使用一个queue来暂时存储要执行upDate的watcher对象，在下一个tick的时候再讲queue取出同一upDate,而在一个tick的时间段内，一个vue实例数据的set多次被调用，这个vue实例的watcher对象只会被进队列一次，意思这里面有个过滤功能；因为在执行更新的时候，数据都已经是被更新过的，视图只需要更新一次就能满足这个需求，所以只需要将对应的watcher对象的update执行一次就行了。而这个tick时间，是通过setTimeout来实现的。
 
-#### 五、参考文章
+#### 六、参考文章
 - [详解vue的diff算法](https://juejin.im/post/5affd01551882542c83301da)
 - [vue 父子组件的生命周期顺序](https://www.cnblogs.com/status404/p/8733629.html)
 - [vue 生命周期 详解](https://www.cnblogs.com/happ0/p/8075562.html)
