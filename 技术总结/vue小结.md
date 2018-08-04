@@ -27,7 +27,10 @@ react和vue都要虚拟DOM，这里只说vue的，关键部分：virtual Dom是�
 
 #### 2.详细过程
 ##### 2.1 patch 过程
-核心部分在**patch**函数中进行，首先判断oldVnode和Vnode是否是相同的节点，如果不是则直接渲染出Vnode的DOM,并插入到oldVnode的真实DOM的父节点中；如果是则调用**patchVnode**进行进一步比较；首先执行Vnode.el=oldVnode.el,将oldVnode渲染出的真实DOM赋值给Vnode的el（el最开始的时候为null） 首先比较oldVnode和Vnode是否是同一个引用，如果是则不需要更改，如果不是则对其子节点进行比较，先判断两者是否是文本节点，如果是则根据文本内容判断，如果两个内容不同则将Vnode.text替换到真实DOM上；如果不是则对其子节点进行比较，首先判断是否有子节点的情况：1）oldVnode没有子节点，Vnode有子节点，则直接添加子节点到DOM上；2）oldVnode有子节点，Vnode没有子节点，则直接在DOm上删除子节点；3）都有子节点且子节点不相等，则调用**updateChildren**进行子节点的进一步比较；4）其他情况，则DOM不变。
+核心部分在**patch**函数中进行，首先判断oldVnode和Vnode是否是相同的节点，如果不是则直接渲染出Vnode的DOM,并插入到oldVnode的真实DOM的父节点中；如果是则调用**patchVnode**进行进一步比较；首先执行Vnode.el=oldVnode.el,将oldVnode渲染出的真实DOM赋值给Vnode的el（el最开始的时候为null） 首先比较oldVnode和Vnode是否是同一个引用，如果是则不需要更改，如果不是则对其子节点进行比较，先判断两者是否是文本节点，如果是则根据文本内容判断，如果两个内容不同则将Vnode.text替换到真实DOM上；如果不是则对其子节点进行比较，首先判断是否有子节点的情况：1）oldVnode没有子节点，Vnode有子节点，则直接添加子节点到DOM上；2）oldVnode有子节点，Vnode没有子节点，则直接在DOm上删除子节点；3）都有子节点且子节点不相等，则调用**updateChildren**进行子节点的进一步比较；4）其他情况，则DOM不变.
+
+![image](/img/01.jpg)
+
 ##### 2.2 updateChildren 过程
 这个过程的算法很巧妙，也很简单；首先会为oldVnode和Vnode的子节点上设置oldVSIdx、oldVEIdx和VSIdx、VEIdx，进行两两比较,一共比较四次，如果匹配上了，就对DOM节点进行相应的移动，然后对应的指针向中间靠，如果没有匹配上，则判断是否设置了key,如果有则oldVnode的子节点会生成hash，然后Vnode的VSIdx和VEIdx位置的key会进行匹配，这样就会最大化的利用到oldVnode的DOM,而不是去产生DOM；当其中的一对SIdx>EIdx时说明其中一个Vnode的子节点扫描完毕，不用进行比较了，后面的操作可想而知是查漏补缺的过程。
 
