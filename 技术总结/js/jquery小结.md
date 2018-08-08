@@ -1,4 +1,4 @@
-#jQuery的基础知识和主要的api
+# jQuery的基础知识和主要的api
 > 2018.8.8
 ## 前言 
     没有什么要说的。。。还是说点把，前段时间github将jQuery从前端全部移除，而是采用原生实现前端（并没有使用当前热门的框架），又掀起了对大家对jQuery的缅怀，我自己说实话没怎么用过jQuery，在学习前端的路线上人云亦云的学的，但是我觉得是该学的，以后的也是，不管前端框架如何改变，只要原生js不变，jQuery还是必须要学的。
@@ -72,3 +72,5 @@ ajax(url,setting)：seting对象包含有：asyn（是否异步）、method、co
 Get(url，setting)和post(url，setting)
 #### 五、自定义插件
 基本语法：`$.fn.function()`，在function中定义自己的插件，在函数内部使用this来表示要操作的jQuery对象，注意：在函数末尾return this，以便实现链式操作，还可以在`$.fn.function.defaults` 对象上设置默认参数，在没有参数传入时可以使用默认参数。
+### 六、参考文章
+- [javaScript教程——廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344992519683bcfa2e33760462fb5db8eb9430924be000)
