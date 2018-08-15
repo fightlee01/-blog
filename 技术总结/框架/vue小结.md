@@ -42,7 +42,7 @@ react和vue都要虚拟DOM，这里只说vue的，关键部分：virtual Dom是�
 #### 五、nextTick()的原理
 由于上面说的响应式的特性会有一个bug,就是每次数据一更新就会调用set然后会update，假如在一个密集的操作里（比如对一个for循环里操作数据），岂不是要更新很多次，这性能消耗非常严重，这个就是nextTick()要做的事情了，因为每次更新都有set-->dep-->watcher-->upDate过程，在wacher要执行更新的这一步骤做点更改，使用一个queue来暂时存储要执行upDate的watcher对象，在下一个tick的时候再讲queue取出同一upDate,而在一个tick的时间段内，一个vue实例数据的set多次被调用，这个vue实例的watcher对象只会被进队列一次，意思这里面有个过滤功能；因为在执行更新的时候，数据都已经是被更新过的，视图只需要更新一次就能满足这个需求，所以只需要将对应的watcher对象的update执行一次就行了。而这个tick时间，是通过setTimeout来实现的。
 
-#### 六、参考文章
+## 参考文章
 - [详解vue的diff算法](https://juejin.im/post/5affd01551882542c83301da)
 - [vue 父子组件的生命周期顺序](https://www.cnblogs.com/status404/p/8733629.html)
 - [vue 生命周期 详解](https://www.cnblogs.com/happ0/p/8075562.html)

@@ -128,7 +128,7 @@ Dom中所有节点都是继承自Node类型，都共享着相同的基本属性�
 1）setAttribute: 语法element.setAttribute(name,value);
 
 2）getAttribute：语法element.getAttribute(name);
-### 七、参考文章
+## 参考文章
 - [javaScript教程——廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/0014344992519683bcfa2e33760462fb5db8eb9430924be000)
 - [Javascript操作DOM常用API总结](http://luopq.com/2015/11/30/javascript-dom/)
 

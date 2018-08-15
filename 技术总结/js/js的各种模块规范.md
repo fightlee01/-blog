@@ -26,7 +26,7 @@ CommonJs的模块规范主要是应用于nodeJs，它是以同步方式加�
 - CommonJs是运行时加载：CommonJs的模块是对象，所以只要运行时才能获取对象的属性和方法，这样导致CommonJs只能是在运行时使用。
 - ES6模块是静态加载或者编译时加载：ES6的模块通过exports指定输出的代码，然后import引入，故在编译时就已经完成模块的加载，效率会高很多，且使得静态分析成为可能；但是因为模块不是对象，模块就不能引用自身。
 
-### 三、参考文章
+## 参考文章
 - [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 - [前端模块化：CommonJS,AMD,CMD,ES6](https://juejin.im/post/5aaa37c8f265da23945f365c)
 - [前端模块化，AMD与CMD的区别](https://juejin.im/post/5a422b036fb9a045211ef789)
