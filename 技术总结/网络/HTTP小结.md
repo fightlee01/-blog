@@ -11,7 +11,17 @@ http是一个无状态、持久连接、管线化的协议。
 - 管线化: HTTP协议支持GET和HEAD方法的请求并发，可以加快资源的请求。
 ### 二、HTTP的构成
 ![image](/img/http.png)
-### 三、HTTP头部
+### 三、HTTP请求方法
+    HTTP1.0只有 GET、POST和HEAD方法，而HTTP1.1增加了PUT、DELETE、OPTIONS、TRACE和CONNECT方法
+- GET 请求指定页面信息，并返回实体主体
+- POST 向指定资源提交数据进行处理请求
+- PUT 从客户端向服务器传送数据取代指定的文档的内容
+- OPTIONS  运行客户端查看服务器的性能
+- HEAD 类似GET请求，只不过返回的响应中没有具体内容，用于获取报头
+- DELETE 请求服务器删除指定内容
+- TRACE 回显服务器收到的请求，主要用于测试或诊断
+- CONNECT HTTP1.1预留给能够将连接改为管道方式的代理服务器
+
 ### 四、重要的状态码
 #### 1xx(临时响应)
     表示临时响应并需要请求者继续执行操作的状态码
@@ -66,5 +76,8 @@ http是一个无状态、持久连接、管线化的协议。
 
 
 ## 参考文章
--[HTTP管线化(HTTP pipelining)](https://blog.csdn.net/dongzhiquan/article/details/6114040)
--[]
+- [HTTP管线化(HTTP pipelining)](https://blog.csdn.net/dongzhiquan/article/details/6114040)
+- [HTTP 状态码（HTTP Status Code）](https://blog.csdn.net/u014346301/article/details/53995333)
+- [图解http（02）-http基础](https://blog.csdn.net/weixin_36244867/article/details/77963885)
+
+- [菜鸟教程](http://www.runoob.com/http/http-methods.html)
