@@ -7,18 +7,18 @@
 EMCAScript定义的标准事件主要有三个阶段：1）事件捕获：从docment到目标Dom由上到下传播，期间如果注册了对应的监听事件都会触发；2）目标阶段；3）冒泡阶段：从目标Dom到document由下到上传播。注册事件时可以选择在捕获阶段触发还是冒泡阶段触发。
 
 注册事件    
-
-    target.addEventListener(type,listener,useCapture)
-    // target 对应dom节点
-    // type 事件种类
-    // listener 事件触发时调用的函数
-    // useCapture Boolen 表示注册的事件是在捕获阶段触发还是冒泡阶段，默认为default
-
+```javascript
+target.addEventListener(type,listener,useCapture)
+// target 对应dom节点
+// type 事件种类
+// listener 事件触发时调用的函数
+// useCapture Boolen 表示注册的事件是在捕获阶段触发还是冒泡阶段，默认为default
+```
 移除事件
-
-    target.removeEventListener(type,listener、userCapture)
-    // 注意：listener必须与注册时是同一个引用，不然不会移除成功。
-
+```javascript
+target.removeEventListener(type,listener、userCapture)
+// 注意：listener必须与注册时是同一个引用，不然不会移除成功。
+```
 ![image](/img/09.jpg)
 ### 二、特殊的事件机制
 IE比较特殊，它的事件机制只有两个阶段：1）处于目标阶段；2）冒泡阶段（万恶的IE）

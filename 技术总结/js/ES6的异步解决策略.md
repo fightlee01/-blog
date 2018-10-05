@@ -9,32 +9,34 @@
 Promise是一种比较特殊的异步解决方案，首先一个Promise对象表示一个异步操作，通过三个状态表示异步操作的状态：pending(进行中)、fulfilled（已成功）、rejected（以失败），故promise只有两种情况或者结果：1）pending-->fulfilled(表示异步操作成功)；2）pending-->rejected（表示异步操作失败）。Promise对象一创建就立即执行了，然后Promise对象执行完成后，状态就凝固了，所以Promise的状态是不可逆的且不可改变的。
 
 语法： Promise对象提供两个方法resolve和reject,一是用来在异步操作结束的时候转换Promise的状态，二是用来将数据传递出去给后面的then或者catch使用。故必须使用这两个方法，不然Promise状态无法转换，异步操作就无法执行。
+```javascript
+const promise = new Promise(function(resolve, reject) {
+// ... some code
 
-    const promise = new Promise(function(resolve, reject) {
-    // ... some code
-
-    if (/* 异步操作成功 */){
-        resolve(value);
-    } else {
-        reject(error);
-    }
-    });
-
+if (/* 异步操作成功 */){
+    resolve(value);
+} else {
+    reject(error);
+}
+});
+```
 .then(resolve,reject)方法可以在Promise对象状态凝固以后触发，resolve表示状态成功，reject表示状态失败，这两个函数需要自己定义（只有一个会触发，因为状态只可能是一个），两个函数都提供一个参数，表示在从异步操作传递过来的数据。由于then考虑到then返回的可能会是一个promise对象，所以支持链式调用。
-
-    getJSON("/posts.json").then(function(json) {
-    return json.post;
-    }).then(function(post) {
-    // ...
-    });
+```javascript
+getJSON("/posts.json").then(function(json) {
+return json.post;
+}).then(function(post) {
+// ...
+});
+```
 .catch()是.then(null,reject)的别名，所以一般then只处理成功的状态，catch负责失败的状态。
-
-    getJSON('/posts.json').then(function(posts) {
-    // ...
-    }).catch(function(error) {
-    // 处理 getJSON 和 前一个回调函数运行时发生的错误
-    console.log('发生错误！', error);
-    });
+```javascript
+getJSON('/posts.json').then(function(posts) {
+// ...
+}).catch(function(error) {
+// 处理 getJSON 和 前一个回调函数运行时发生的错误
+console.log('发生错误！', error);
+});
+```
 ### 二、Generator
 Generator一个更加奇葩的异步结局方案，通过`*`来声明函数为Generator函数和然后使用`yield`关键来表明那些是`异步`操作，然后这个Generator函数不会立即执行而是返回一个遍历对象，通过调用next()方法执行内部的逻辑，执行next()会从开头或者上一个yield语句为开头开始执行，执行到yield或者return结束,会返回一个结果{value,done},value表示yield后面语句执行的结果，done为布尔值表示是否Generator函数执行完毕，只有遇到return才会是true；yield没有返回值（undefined），可以使用next(value)提供返回值，这个值是上一个yield的结果，所以第一个next()添加参数默认不会生效。
 
