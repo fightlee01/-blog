@@ -16,8 +16,6 @@
 - 子组件更新：beforeUpdate父-->beforeUpdate子-->updated子-->updated父
 - 父组件更新：beforeUpdate父-->updated父
 
-
-
 ### 二、 虚拟DOM
 react和vue都要虚拟DOM，这里只说vue的，关键部分：virtual Dom是真实DOM的一种抽象，就是通过一个对象里面的字段来描述真实的DOM对象，比如：tag代表标签名（String）、children代表子节点（Array）、data代表一些属性（Object）等；主要目的：原生的api产生和操作Dom的虚拟消耗太大，通过虚拟DOM来完成对真实DOM进行抽象，在虚拟DOM上完成对DOM的一系列操作（增、删、改）和后面的diff算法，最后再对虚拟DOM进行渲染，这样可以大大对原生api的依赖，一句话就是优化性能。
 
