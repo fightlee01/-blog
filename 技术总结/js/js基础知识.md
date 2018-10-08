@@ -8,13 +8,12 @@
 - 复杂数据类型：Object、Array、Function、Date、Error、RegExp
 - 全局数据类：Math
 ### 二、各个数据类型typeof结果
-- Number: “number”
+- Number、NaN: “number”
 - String: “string”
 - Object、Null、Error、Date、RegExp、Math、Array: “obeject”
 - Boolean: “boolean”
 - Function: “function”
 - Undefinde: ‘undefind’
-- Nan: ‘undefind’
 ### 三、非全等下判定为false的情况
 Nan、null、undefined、false、””、0
 ### 四、String和 Array的常用方法
@@ -22,8 +21,8 @@ Nan、null、undefined、false、””、0
 - toUpperCase： 将字符串全部置换为大写返回新字符串，对原字符串无影响。
 - toLowerCase：将字符串全部置换为小写 str.toLowerCase（）上同，
 - indexOf: 检索出字符串的位置，如果没有就返回-1 str.indexOf(str1)
-- substring: 复制指定位置的字符串，str.substring(start,end) 以end截止不包含end,str.substring(index1)从index1到字符串结尾
-- substr: substr(start,len) 提取一个以start开始的len长度的字符串
+- substring: 复制指定位置的字符串，str.substring(start,end) 以end截止不包含end,str.substring(index1)从index1到字符串结尾,且不填写参数的时候（substring（））直接返回原字符串一样的新的字符串。
+- substr: substr(start,len) 提取一个以start开始的len长度的字符串。
 - concat： 连接两个或多个字符串，str.concat(str1,...)返回新字符串，对原字符串无影响。
 - charAt: 返回指定位置的字符串，str.chartAt(index)
 - split: 把字符串分割成字符数组返回新数组，对原字符串无影响。
@@ -31,7 +30,7 @@ Nan、null、undefined、false、””、0
 - slice：和substring的该功能用法一直
 #### 2.Array
 - indexOf检索出数组中的元素，返回其位置，如果没有就返回-1，arr.indexOf(12)
-- slice 截取出数组中指定位置返回出一个新数组，arr.slice(1,4),arr.slice(5)，返回新数组，对原数组无影响。
+- slice 截取出数组中指定位置返回出一个新数组，arr.slice(1,4),arr.slice(5)，返回新数组，对原数组无影响，用法string的slice一致。
 - push和pop,向数组末尾添加和删除一个元素，arr.push(),arr.pop()
 - unshift和shift，先数组头部添加或删除一个元素，arr.unshift()，arr.shift()
 - sort，排序可以传入函数进行自定义排序逻辑，对原数组进行操作，不返回新数组。
@@ -119,7 +118,7 @@ Dom中所有节点都是继承自Node类型，都共享着相同的基本属性�
 
 3）nextSibling：返回后一个节点，如果自己是最后一个节点则返回nul，返回值能是Text、Element、Commont等，注意判断nodeType；nextElementSibling：返回后一个元素节点，且必须是Element。
 
-4）childNiodes：返回一个即时的NodeList，内容可能会是Text、Element、Commont等，注意判断nodeType；
+4）childNodes：返回一个即时的NodeList，内容可能会是Text、Element、Commont等，注意判断nodeType；
 
 5）children返回一个即时HTMLCollection，内容必须是Element类型。
 
