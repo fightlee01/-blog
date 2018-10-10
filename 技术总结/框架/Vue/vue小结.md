@@ -8,8 +8,7 @@
 ### 一、Vue生命周期
 
 #### 1.概览
-整个生命周期可以分为三个部分：初始化-->更新-->消亡，而最重要的是初始化和更新。初始化过程主要分三个阶段：1）初始化：在beforeCreate之前完成生命周期和事件的初始化，在created之前完成数据的挂载和事件的绑定，在created中就可以对数据（props和data）进行处理，一般在这个时候初始化需要的数据；2）编译虚拟DOM：Vue将模板编译为虚拟DOM，这个时候beforeMount钩子触发；3）渲染DOM：将虚拟DOM放入render()中渲染出真实的DOM，此时mounted可以操作DOM。
-更新主要涉及diff，根据Vue的数据（data、props）变更，会进行变更，在数据变更之前会触发beforeUpdate，然后进行diff，得到需要重新渲染的部分，最后对Virtual DOM进行渲染,完成更新，之后updated钩子触发，这时可以操作新的DOM。
+nb更新主要涉及diff，根据Vue的数据（data、props）变更，会进行变更，在数据变更之前会触发beforeUpdate，然后进行diff，得到需要重新渲染的部分，最后对Virtual DOM进行渲染,完成更新，之后updated钩子触发，这时可以操作新的DOM。
 #### 2.父子组件间的生命周期
 （记得面试的时候吃过亏，现在又忘了，哎！这人）一句话总结就是先有父后有子，血脉相连。
 - 初始化时候父子组件钩子的触发顺序：beforeCreate父-->created父-->beforeMount父-->beforeCreate子-->created子-->beforeMount子-->Mounted子-->Mounted父
@@ -38,7 +37,7 @@ react和vue都要虚拟DOM，这里只说vue的，关键部分：virtual Dom是�
 #### 四、响应式的原理
 (又看的我有点蒙蔽)vue的响应式的设计模式其实就是观察者；在开始的初始化阶段，通过Obeject.definePropoty()来对vue的数据对象（这里应该是data）的每个属性添加get和set的钩子，而每个属性都有一个dep负责依赖的管理，get钩子被调用的时候（执行render()的时候）会进行依赖收集，dep对使用了属性的视图进行watcher实例收集，然后在set调用的时候，dep会通知所有收集的watcher进行视图更新。（每个vue实例都有一个watcher实例，可以理解为一个一个视图）。
 #### 五、nextTick()的原理
-由于上面说的响应式的特性会有一个bug,就是每次数据一更新就会调用set然后会update，假如在一个密集的操作里（比如对一个for循环里操作数据），岂不是要更新很多次，这性能消耗非常严重，这个就是nextTick()要做的事情了，因为每次更新都有set-->dep-->watcher-->upDate过程，在wacher要执行更新的这一步骤做点更改，使用一个queue来暂时存储要执行upDate的watcher对象，在下一个tick的时候再讲queue取出同一upDate,而在一个tick的时间段内，一个vue实例数据的set多次被调用，这个vue实例的watcher对象只会被进队列一次，意思这里面有个过滤功能；因为在执行更新的时候，数据都已经是被更新过的，视图只需要更新一次就能满足这个需求，所以只需要将对应的watcher对象的update执行一次就行了。而这个tick时间，是通过setTimeout来实现的。
+由于上面说的响应式的特性会有一个bug,就是每次数据一更新就会调用set然后会update，假如在一个密集的操作里（比如对一个for循环里操作数据），岂不是要更新很多次，这性能消耗非常严重，这个就是nextTick()要做的事情了，因为每次更新都有set-->dep-->watcher-->upDate过程，在wacher要执行更新的这一步骤做点更改，使用一个queue来暂时存储要执行upDate的watcher对象，在下一个tick的时候再讲queue取出同一upDate,而在一个tick的时间段内，一个vue实例数据的set多次被调用，这个vue实例 的watcher对象只会被进队列一次，意思这里面有个过滤功能；因为在执行更新的时候，数据都已经是被更新过的，视图只需要更新一次就能满足这个需求，所以只需要将对应的watcher对象的update执行一次就行了。而这个tick时间，是通过setTimeout来实现的。
 
 ## 参考文章
 - [详解vue的diff算法](https://juejin.im/post/5affd01551882542c83301da)
